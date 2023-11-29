@@ -21,11 +21,11 @@ class UserLoginForm(FlaskForm):
     password = PasswordField('비밀번호', validators=[DataRequired()])
 
 class HobbyForm(FlaskForm):
-    username = StringField('이름', validators=[DataRequired(), Length(min=3, max=25)])
-    age = StringField('나이', validators=[DataRequired()])
-    purpose = StringField('취미의 목적', validators=[DataRequired()])
+    username = StringField('이름', validators=[DataRequired('이름을 입력해주세요.'), Length(min=3, max=25)])
+    age = StringField('나이', validators=[DataRequired('나이를 입력해주세요')])
+    purpose = StringField('취미의 목적', validators=[DataRequired('취미의 목적을 입력해주세요.')])
     hobby1 = StringField('관람 (영화, 공연, 전시회)')
     hobby2 = StringField('공부 (어학, 자격증, 독서)')
     hobby3 = StringField('운동 (수영, 헬스, 필라테스, 조깅)')
     hobby4 = StringField('기타 (봉사활동, 웹툰보기, 게임)')
-    email = EmailField('이메일', validators=[DataRequired('이메일은 필수입력 항목입니다.'), Email()])
+    email = EmailField('이메일', validators=[DataRequired('이메일을 입력해주세요.'), Email()])
