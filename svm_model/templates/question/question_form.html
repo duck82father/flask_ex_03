@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- 질문 등록 -->
+<div class="container">
+
+    {% if pred_text %}
+        <div class="card my-3 bg-success">
+            <div class="card-body">
+                <div class="card-text" style="white-space: pre-line;"><h2 class="text-light">{{ pred_text }}</h2></div>
+                <div class="d-flex justify-content-end">
+                    <div class="badge bg-light text-dark p-2">
+                        {{ pred_text }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+
+    <!--form 태그에 action 속성을 지정하지 않으면 현재 페이지의 URL이 디폴트 action으로 설정된다.-->
+    <form method="post" class="my-3">
+        
+        {{ form.csrf_token }}
+        {% include 'form_errors.html' %}
+
+        <div class="mb-3">
+            <label for="subject">3P : 한 경기 평균 블로킹 성공 횟수</label>
+            <input type="text" class="form-control" name="subject" id="subject" value="{{ form.subject.data or '' }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="subject">BLK : 한 경기 평균 블로킹 성공 횟수</label>
+            <input type="text" class="form-control" name="content" id="content" value="{{ form.content.data or '' }}">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">저장하기</button>
+
+    </form>
+</div>
+{% endblock %}

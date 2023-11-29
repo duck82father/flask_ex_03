@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- 취미 등록 -->
+<div class="container">
+    <br>
+    <h3 class="my-3 pb-2 fw-bold">당신의 취미를 수집합니다</h3>
+    <hr style="margin-bottom: 40px;">
+    <form method="post" class="my-3">
+
+        {{ form.csrf_token }}
+        {% include 'form_errors.html' %}
+        
+        <div class="mb-3">
+            <label for="username">1. 이름</label><br>
+            <input type="text" id="username" name="username" value="{{ form.username.data or '' }}"><br><br>
+        </div>
+
+        <div class="mb-3">
+            <label for="age">2. 나이</label><br>
+            <input type="text" id="age" name="age" value="{{ form.age.data or '' }}"><br><br>
+        </div>
+
+        <div class="mb-3">
+            <P>3. 당신의 취미활동에 목적이 있다면?</P>
+            <input type="radio" id="p1" name="purpose" value="{{ 'p1' or '' }}">
+            <label for="p1">스트레스 해소</label><br>
+
+            <input type="radio" id="p2" name="purpose" value="{{ 'p2' or '' }}">
+            <label for="p2">재미와 즐거움</label><br>
+
+            <input type="radio" id="p3" name="purpose" value="{{ 'p3' or '' }}">
+            <label for="p3">마음의 안정과 휴식</label><br>
+
+            <input type="radio" id="p4" name="purpose" value="{{ 'p4' or '' }}">
+            <label for="p4">건강 관리</label><br><br>
+        </div>
+
+        <div class="mb-3">
+            <P>4. 당신의 취미를 골라주세요. (중복 가능)</P>
+            <input type="checkbox" id="hobby1" name="hobby1" value="{{ 'h1' or '' }}">
+            <label for="hobby1">야외활동 : 골프, 낚시, 사진촬영, 여행</label><br>
+            <input type="checkbox" id="hobby2" name="hobby2" value="{{ 'h2' or '' }}">
+            <label for="hobby2">관람 (영화, 공연, 전시회)</label><br>
+            <input type="checkbox" id="hobby4" name="hobby3" value="{{ 'h3' or '' }}">
+            <label for="hobby3">운동 (수영, 헬스, 필라테스, 조깅)</label><br>
+            <input type="checkbox" id="hobby4" name="hobby4" value="{{ 'h4' or '' }}">
+            <label for="hobby4">기타 (봉사활동, 웹툰보기, 게임)</label><br><br>
+        </div>
+
+        <div class="mb-3">
+            <label for="email">5.이메일주소</label><br>
+            <input type="text" id="email" name="email" value="{{ form.email.data or '' }}"><br><br>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">저장하기</button>
+    </form> 
+    
+</div>   
+    
+{% endblock %}

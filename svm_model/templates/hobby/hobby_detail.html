@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+<div class="container my-3">
+    <!-- 질문 -->
+    <h2 class="border-bottom py-2">당신의 취미활동</h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="line-height: 2.4em; font-size: 1.3em; padding:20px 20px 0px 20px">
+                <div class="d-flex justify-content-end">
+                    <div class="badge bg-light text-dark p-2">
+                        🕊️ 당신의 이메일 주소 : <span class="fs-6">{{ form.email }}</span><br>
+                    </div>
+                </div>
+                당신의 이름은 <span class="fs-5 fw-bold">{{ form.username }}</span>이고 나이는 <span class="fs-5 fw-bold">{{ form.age }}</span>입니다.<br>
+                당신이 가진 취미의 목적은 <span class="fs-5 fw-bold">{% if form.purpose == 'p1' %}스트레스 해소{% elif form.purpose == 'p2' %}재미와 즐거움{% elif form.purpose == 'p3' %}마음의 안정과 휴식{% else %}건강 관리{% endif %}</span> 입니다.<br>
+                <hr>
+                <span style="line-height: 2.5em;">당신의 취미는..</span>
+                <ul>
+                    <span class="fs-5 fw-bold" style="line-height: 2em;">
+                    {% if form.hobby1 == 'h1' %}<li>야외활동 : 골프, 낚시, 사진촬영, 여행</li>{% endif %}
+                    {% if form.hobby2 == 'h2' %}<li>관람 (영화, 공연, 전시회)</li>{% endif %}
+                    {% if form.hobby3 == 'h3' %}<li>운동 (수영, 헬스, 필라테스, 조깅)</li>{% endif %}
+                    {% if form.hobby4 == 'h4' %}<li>기타 (봉사활동, 웹툰보기, 게임)</li>{% endif %}
+                    </span>
+                </ul>
+                <div class="d-flex justify-content-end">
+                    <div class="badge bg-primary opacity-50 p-3">
+                        <a class="text-white" style="text-decoration-line: none;" href="{{ url_for('hobby.create') }}"><span style="font-size: 1.2em;display: block; margin-bottom:12px;">👉</span> 다시하기</a>
+                    </div>
+                </div>
+                <br>
+            </div>        
+
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}
