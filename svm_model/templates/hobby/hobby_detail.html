@@ -7,10 +7,10 @@
     <h2 class="border-bottom py-2">당신의 취미활동</h2>
     <div class="card my-3">
         <div class="card-body">
-            <div class="card-text" style="line-height: 2.4em; font-size: 1.3em; padding:20px 20px 0px 20px">
-                <div class="d-flex justify-content-end">
+            <div class="card-text" style="line-height: 2.4em; font-size: 1.3em; padding:20px">
+                <div class="d-flex justify-content-end mb-4">
                     <div class="badge bg-light text-dark p-2">
-                        🕊️ 당신의 이메일 주소 : <span class="fs-6">{{ form.email }}</span><br>
+                        &#128077; 당신은 {{ form.id }}번째 참여자입니다.  |  🕊️ 당신의 이메일 주소 : <span class="fs-6">{{ form.email }}</span><br>
                     </div>
                 </div>
                 당신의 이름은 <span class="fs-5 fw-bold">{{ form.username }}</span>이고 나이는 <span class="fs-5 fw-bold">{{ form.age }}</span>입니다.<br>
@@ -30,12 +30,33 @@
                         <a class="text-white" style="text-decoration-line: none;" href="{{ url_for('hobby.create') }}"><span style="font-size: 1.2em;display: block; margin-bottom:12px;">👉</span> 다시하기</a>
                     </div>
                 </div>
-                <br>
             </div>        
-
         </div>
     </div>
-    
+    {% for hobby_each in list %}
+        {% if hobby_each.id != form.id %}
+            <div class="card my-3">
+
+                <div class="card-body bg-light">
+                    <div class="d-flex mb-2">
+                        <div class="badge bg-light text-dark p-2">
+                            📝 {{ hobby_each.id }}번째 참여자 | {{ form.email }}
+                        </div>
+                    </div>
+                    <div class="card-text" style="font-size: 0.9em; padding:0px 20px 0px 20px;">
+                        <div style="line-height: 2em;"><span class="fw-bold">{{ hobby_each.username }}</span> | {{ hobby_each.age }} | {% if hobby_each.purpose == 'p1' %}스트레스 해소{% elif hobby_each.purpose == 'p2' %}재미와 즐거움{% elif hobby_each.purpose == 'p3' %}마음의 안정과 휴식{% else %}건강 관리{% endif %}</div>
+                        <ul>
+                            {% if hobby_each.hobby1 == 'h1' %}<li style="float:left; margin-right:30px">야외활동 : 골프, 낚시, 사진촬영, 여행   </li>{% endif %}
+                            {% if hobby_each.hobby2 == 'h2' %}<li style="float:left; margin-right:30px">관람 (영화, 공연, 전시회)   </li>{% endif %}
+                            {% if hobby_each.hobby3 == 'h3' %}<li style="float:left; margin-right:30px">운동 (수영, 헬스, 필라테스, 조깅)   </li>{% endif %}
+                            {% if hobby_each.hobby4 == 'h4' %}<li style="float:left; margin-right:30px">기타 (봉사활동, 웹툰보기, 게임)   </li>{% endif %}
+                        </ul>
+                    </div>        
+                </div>
+
+            </div>
+        {% endif %}
+    {% endfor %}
 </div>
 
 {% endblock %}

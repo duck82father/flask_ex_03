@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, url_for
+from flask import Blueprint, render_template, request, url_for, g
 from werkzeug.utils import redirect
 
 from svm_model import db
@@ -24,6 +24,8 @@ def detail(question_id):
 
 @bp.route('/create/', methods=('GET', 'POST'))
 def create():
+    if not g.user :
+        return render_template('index.html')
     form = QuestionForm()
     if request.method == 'POST' and form.validate_on_submit():
         question = Question(three=form.subject.data, blk=form.content.data)
