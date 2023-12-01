@@ -14,15 +14,11 @@
                 {% include 'form_errors.html' %}
                 
                 <div class="pt-3 pb-2 border-top">
-                    <label class="question" for="username">1. 이름</label><br>
-                    <input type="text" id="username" name="username" value="{{ form.username.data or g.user.username }}"><br><br>
-                </div>
-
-                <div class="pt-3 pb-2 border-top">
-                    <label class="question" for="age">2. 나이</label><br>
+                    <label class="question ml-1" for="username">1. 이름</label>
+                    <input type="text" id="username" name="username" value="{{ form.username.data or g.user.username }}"><br>
+                    <label class="question ml-1" for="age">2. 나이</label>
                     <input type="text" id="age" name="age" value="{{ form.age.data or '' }}"><br><br>
                 </div>
-
                 <div class="pt-3 pb-2 border-top">
                     <P class="question" >3. 당신의 취미활동에 목적이 있다면?</P>
                     <input type="radio" id="p1" name="purpose" value="{{ 'p1' or '' }}">
@@ -51,9 +47,15 @@
                 </div>
 
                 <div class="pt-3 pb-2 border-top">
-                    <label class="question" for="email">5.이메일주소</label><br>
-                    <input type="text" id="email" name="email" value="{{ form.email.data or '' }}"><br><br>
+                    <label class="question" for="email">5. 이메일주소</label><br>
+                    <input type="text" id="email" name="email" value="{{ form.email.data or g.user.email }}"><br><br>
                 </div>
+
+                <div class="pt-3 pb-2 border-top">                  
+                    <label for="pfile" class="form-label question">6. 취미활동 관련 사진 (필수)</label><br>
+                    <input class="form-control" type="file" id="pfile" name="file">
+                </div>
+
                 <div class="position-absolute start-50 translate-middle mt-4">
                     <button type="submit" class="btn btn-primary justify-content-center">저장하기</button>
                 </div>

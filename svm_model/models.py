@@ -39,3 +39,4 @@ class Hobby(db.Model):
     create_date = db.Column(db.DateTime(), nullable=False)
     modify_date = db.Column(db.DateTime(), nullable=True)
     voter = db.relationship('User', secondary=hobby_voter, backref=db.backref('hobby_voter_set'))
+    filename = db.Column(db.String(150))

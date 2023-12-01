@@ -16,13 +16,17 @@ def signup():
     form = UserCreateForm()
     if request.method == 'POST' and form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()    # first() : 쿼리 결과에서 가장 첫 번째 행만 반환하는 함수
+        email = User.query.filter_by(email=form.email.data).first()
         if not user:
-            user = User(username=form.username.data,
+            if not email:
+                user = User(username=form.username.data,
                         password=generate_password_hash(form.password1.data),   # hash : 복호화가 불가능한 단방향 암호화
                         email=form.email.data)
-            db.session.add(user)
-            db.session.commit()
-            return redirect(url_for('main.index'))
+                db.session.add(user)
+                db.session.commit()
+                return redirect(url_for('main.index'))
+            else:
+                flash('이미 존재하는 이메일 주소입니다.')
         else:
             flash('이미 존재하는 사용자입니다.')
     return render_template('auth/signup.html', form=form)
