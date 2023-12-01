@@ -4,9 +4,17 @@ from werkzeug.utils import redirect
 from svm_model import db
 from svm_model.forms import HobbyForm
 from svm_model.models import Question, Hobby
+from svm_model.views.auth_views import login_required
 from datetime import datetime
 
 bp = Blueprint('hobby', __name__, url_prefix='/hobby')
+
+
+@bp.route('/list/')
+def list():
+    form = HobbyForm
+    hobby_list = Hobby.query.order_by(Hobby.id.desc())
+    return render_template('hobby/hobby_list.html', form=form, list=hobby_list)
 
 @bp.route('/create/', methods=('GET', 'POST'))
 def create():
@@ -22,7 +30,9 @@ def create():
             hobby3=form.hobby3.data,
             hobby2=form.hobby2.data,
             hobby1=form.hobby1.data,
-            email=form.email.data
+            email=form.email.data,
+            create_date=datetime.now(),
+            user=g.user
         )
         db.session.add(hobby)
         db.session.commit()

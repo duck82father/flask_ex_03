@@ -1,1 +1,11 @@
+ .btn_list {
+    background-color: #3366FF;
+ }
  
+.question {
+    font-weight: 700;
+}
+
+ input {
+    margin-top: 6px;
+ }

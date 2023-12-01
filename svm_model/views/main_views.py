@@ -7,5 +7,5 @@ bp = Blueprint('main', __name__, url_prefix='/')
 @bp.route('/')
 def index():
     if g.user:
-        return redirect(url_for('hobby.create'))
+        return redirect(url_for('hobby.list'))
     return render_template('index.html')

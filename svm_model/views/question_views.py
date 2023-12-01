@@ -4,8 +4,11 @@ from werkzeug.utils import redirect
 from svm_model import db
 from svm_model.forms import QuestionForm, AnswerForm
 from svm_model.models import Question
+from svm_model.views.auth_views import login_required
+
 from datetime import datetime
 from svm_load_model import predictions
+
 
 bp = Blueprint('question', __name__, url_prefix='/question')
 
@@ -23,6 +26,7 @@ def detail(question_id):
     return render_template('question/question_detail.html', question=question, form=form)
 
 @bp.route('/create/', methods=('GET', 'POST'))
+@login_required
 def create():
     if not g.user :
         return render_template('index.html')
